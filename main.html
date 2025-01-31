@@ -5,67 +5,67 @@
 <head>
 	<link rel="stylesheet" href="styles.css">
 	<style>
-		#verification_heading {
-    text-align: center;
-    margin-top: 20px;
-}
+		 #verification_heading {
+            text-align: center;
+            margin-top: 20px;
+        }
 
-#verification_subtext {
-    text-align: center;
-    margin-top: 10px;
-}
+        #verification_subtext {
+            text-align: center;
+            margin-top: 10px;
+        }
 
-.code-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
+        .code-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
 
-.code {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    text-align: center;
-    margin: 5px;
-    border: 2px solid #000;
-}
-
+        .code {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            text-align: center;
+            margin: 5px;
+            border: 2px solid #000;
+        }
 	</style>
 </head>
 
 <body>
-	<h1 id="verification_heading">Verify Your Account</h1>
+	 <h1 id="verification_heading">Verify Your Account</h1>
     <p id="verification_subtext">Please enter the 6-digit code sent to your device</p>
     <div class="code-container">
-        <input type="text" id="code-1" class="code" maxlength="1">
-        <input type="text" id="code-2" class="code" maxlength="1">
-        <input type="text" id="code-3" class="code" maxlength="1">
-        <input type="text" id="code-4" class="code" maxlength="1">
-        <input type="text" id="code-5" class="code" maxlength="1">
-        <input type="text" id="code-6" class="code" maxlength="1">
+        <input type="text" class="code" maxlength="1" autofocus>
+        <input type="text" class="code" maxlength="1">
+        <input type="text" class="code" maxlength="1">
+        <input type="text" class="code" maxlength="1">
+        <input type="text" class="code" maxlength="1">
+        <input type="text" class="code" maxlength="1">
     </div>
 	<!-- the entire body must be written by student -->
     <script type="text/javascript" src="./script.js">
-		const inputs = document.querySelectorAll('.code');
+		document.addEventListener("DOMContentLoaded", () => {
+            const inputs = document.querySelectorAll(".code");
 
-inputs.forEach((input, index) => {
-    input.addEventListener('input', () => {
-        if (input.value !== '') {
-            if (index < inputs.length - 1) {
-                inputs[index + 1].focus();
-            }
-        }
-    });
+            inputs.forEach((input, index) => {
+                input.addEventListener("input", (e) => {
+                    if (e.target.value.match(/[^0-9]/)) {
+                        e.target.value = "";
+                        return;
+                    }
+                    if (e.target.value && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                });
 
-    input.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace' && index > 0 && input.value === '') {
-            inputs[index - 1].focus();
-        }
-    });
-});
-
-inputs[0].focus();
-
+                input.addEventListener("keydown", (e) => {
+                    if (e.key === "Backspace" && !input.value && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                });
+            });
+        });
 </script>
 
 </body>
